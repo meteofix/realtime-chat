@@ -1,0 +1,11 @@
+.messagesFrame{
+    width: 80%;
+    height: 70vh;
+    border: 1px solid lightblue;
+    overflow: auto;
+}
+:global(.rootContainer) .newMessageForm {
+    flex-direction: column;
+    align-items: flex-end;
+    width: 80%;
+}
