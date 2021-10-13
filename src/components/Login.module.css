@@ -1,0 +1,15 @@
+.gridWrapper {
+    align-items: center;
+    justify-content: center;
+}
+
+.gridWrapper .authForm {
+
+}
+
+.gridWrapper .authServices {
+    width: 400px;
+    background: lightblue;
+    align-items: center;
+    flex-direction: column;
+}
