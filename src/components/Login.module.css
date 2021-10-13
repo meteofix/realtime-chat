@@ -1,6 +1,6 @@
 
-.MuiGrid-container  .authForm {
-
+:global(.rootContainer)  .authForm {
+    width: 400px;
 }
 
 :global(.rootContainer)  .authServices {

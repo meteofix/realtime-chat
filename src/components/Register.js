@@ -1,34 +1,28 @@
-import React, {useContext, useState} from 'react';
+import React, {useState} from 'react';
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
+import page from "./page.module.css";
 import Box from "@mui/material/Box";
 import {BlueButton} from "./Navbar";
-import classes from "./Login.module.css"
-import {Context} from "../index";
-//import firebase from "firebase/compat";
-import page from'./page.module.css'
 import TextField from "@mui/material/TextField";
-import {getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup} from "firebase/auth";
+import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
 
-const Login = () => {
-    const {auth} = useContext(Context);
+const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const loginWithEmail = async () => {
-        const {user} = await signInWithEmailAndPassword(auth, email, password);
+    const register = async () => {
+        const auth = getAuth();
+        const {user} = await createUserWithEmailAndPassword(auth, email, password);
         console.log(user);
     }
-    const loginWithGoogle = async () => {
-        const provider = new GoogleAuthProvider();
-        const {user} = await signInWithPopup(auth, provider);
-        console.log(user);
-    }
+
 
     return (
         <Container className="rootContainer">
             <Grid container className={page.gridWrapper} style={{height: window.innerHeight - 50}}>
-                <Grid container className={[page.gridContent, classes.authForm].join(' ')}>
+
+                <Grid container style={{width: '400px'}} className={[page.gridContent, ''].join(' ')}>
                     <h3>Email</h3>
                     <TextField
                         fullWidth
@@ -48,12 +42,7 @@ const Login = () => {
                         onChange={e => setPassword(e.target.value)}
                     />
                     <Box p={5}>
-                        <BlueButton onClick={loginWithEmail}>Sign in</BlueButton>
-                    </Box>
-                </Grid>
-                <Grid container className={[page.gridContent, classes.authServices].join(' ')}>
-                    <Box p={5}>
-                        <BlueButton onClick={loginWithGoogle} >Auth with Google</BlueButton>
+                        <BlueButton onClick={register}>Register</BlueButton>
                     </Box>
                 </Grid>
             </Grid>
@@ -61,4 +50,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Register;
