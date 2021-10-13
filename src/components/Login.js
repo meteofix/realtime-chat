@@ -8,7 +8,7 @@ import {Context} from "../index";
 //import firebase from "firebase/compat";
 import page from'./page.module.css'
 import TextField from "@mui/material/TextField";
-import {getAuth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup} from "firebase/auth";
+import {GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup} from "firebase/auth";
 
 const Login = () => {
     const {auth} = useContext(Context);
@@ -16,18 +16,36 @@ const Login = () => {
     const [password, setPassword] = useState('');
 
     const loginWithEmail = async () => {
-        const {user} = await signInWithEmailAndPassword(auth, email, password);
-        console.log(user);
+        await signInWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                console.log(user);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(`Error ${errorCode}: ${errorMessage}`)
+            });
     }
     const loginWithGoogle = async () => {
         const provider = new GoogleAuthProvider();
-        const {user} = await signInWithPopup(auth, provider);
-        console.log(user);
+        await signInWithPopup(auth, provider)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                console.log(user);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(`Error ${errorCode}: ${errorMessage}`)
+            });
     }
 
     return (
         <Container className="rootContainer">
-            <Grid container className={page.gridWrapper} style={{height: window.innerHeight - 50}}>
+            <Grid container  justifyContent={'center'} className={page.gridWrapper} style={{height: window.innerHeight - 50}}>
                 <Grid container className={[page.gridContent, classes.authForm].join(' ')}>
                     <h3>Email</h3>
                     <TextField

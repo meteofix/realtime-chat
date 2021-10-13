@@ -1,20 +1,31 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import page from "./page.module.css";
 import Box from "@mui/material/Box";
 import {BlueButton} from "./Navbar";
 import TextField from "@mui/material/TextField";
-import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
+import {createUserWithEmailAndPassword} from "firebase/auth";
+import {Context} from "../index";
 
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const {auth} = useContext(Context);
+
 
     const register = async () => {
-        const auth = getAuth();
-        const {user} = await createUserWithEmailAndPassword(auth, email, password);
-        console.log(user);
+        await createUserWithEmailAndPassword(auth, email, password)
+            .then((userCredential) => {
+                // Signed in
+                const user = userCredential.user;
+                console.log(user);
+            })
+            .catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                console.log(`Error ${errorCode}: ${errorMessage}`)
+            });
     }
 
 

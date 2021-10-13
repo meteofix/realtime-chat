@@ -1,6 +1,7 @@
 :global(.rootContainer) .gridWrapper {
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 }
 :global(.rootContainer) .gridContent {
     align-items: center;
