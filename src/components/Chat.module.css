@@ -4,6 +4,20 @@
     border: 1px solid lightblue;
     overflow: auto;
 }
+.messagesFrame .message {
+    margin: 10px;
+    padding: 5px;
+    width: fit-content;
+    border: 2px dashed lightgreen;
+}
+.messagesFrame .messageFromThisUser {
+    margin-left: auto;
+    border: 2px solid lightblue;
+}
+.messagesFrame .message .text{
+    padding: 5px;
+}
+
 :global(.rootContainer) .newMessageForm {
     flex-direction: column;
     align-items: flex-end;
