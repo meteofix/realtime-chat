@@ -5,17 +5,16 @@ import page from "./page.module.css";
 import Box from "@mui/material/Box";
 import {BlueButton} from "./Navbar";
 import TextField from "@mui/material/TextField";
-import {createUserWithEmailAndPassword} from "firebase/auth";
 import {Context} from "../index";
 
 const Register = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const {auth} = useContext(Context);
+    const {auth, app} = useContext(Context);
 
 
     const register = async () => {
-        await createUserWithEmailAndPassword(auth, email, password)
+        await app.auth().createUserWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user;

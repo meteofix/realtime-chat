@@ -5,18 +5,17 @@ import Box from "@mui/material/Box";
 import {BlueButton} from "./Navbar";
 import classes from "./Login.module.css"
 import {Context} from "../index";
-//import firebase from "firebase/compat";
 import page from'./page.module.css'
 import TextField from "@mui/material/TextField";
-import {GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup} from "firebase/auth";
+
 
 const Login = () => {
-    const {auth} = useContext(Context);
+    const {auth, app} = useContext(Context);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     const loginWithEmail = async () => {
-        await signInWithEmailAndPassword(auth, email, password)
+        await app.auth().signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user;
@@ -29,8 +28,8 @@ const Login = () => {
             });
     }
     const loginWithGoogle = async () => {
-        const provider = new GoogleAuthProvider();
-        await signInWithPopup(auth, provider)
+        const provider = new app.auth.GoogleAuthProvider();
+        await app.auth().signInWithPopup(provider)
             .then((userCredential) => {
                 // Signed in
                 const user = userCredential.user;

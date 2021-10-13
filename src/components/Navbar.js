@@ -6,7 +6,7 @@ import {Button} from "@mui/material";
 import styled from "@mui/material/styles/styled";
 import blue from "@mui/material/colors/blue";
 import {NavLink} from "react-router-dom";
-import {LOGIN_ROUTE, REGISTER_ROUTE} from "../utils/consts";
+import {LOGIN_ROUTE, LOGIN_UI_ROUTE, REGISTER_ROUTE} from "../utils/consts";
 import {Context} from "../index";
 import {useAuthState} from "react-firebase-hooks/auth";
 
@@ -29,11 +29,16 @@ const Navbar = () => {
                 <Toolbar variant="dense">
                     <Grid container justifyContent={"flex-end"}>
                         {user ?
-                            <TransparentButton onClick={() => auth.signOut()}>Sign out</TransparentButton>
+                            //<NavLink to={LOGIN_ROUTE}>
+                                <TransparentButton onClick={() => auth.signOut()}>Sign out</TransparentButton>
+                            //</NavLink>
                             :
                             <div>
                                 <NavLink to={LOGIN_ROUTE}>
                                     <TransparentButton>Sign in</TransparentButton>
+                                </NavLink>
+                                <NavLink to={LOGIN_UI_ROUTE}>
+                                    <TransparentButton>Firebase UI</TransparentButton>
                                 </NavLink>
                                 <NavLink to={REGISTER_ROUTE}>
                                     <TransparentButton>Sign up</TransparentButton>

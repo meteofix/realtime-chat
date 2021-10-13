@@ -9,11 +9,11 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {useCollectionData} from "react-firebase-hooks/firestore";
 import Loader from "./Loader";
-import firebase from "firebase/compat";
+import firebase from "firebase";
 import Avatar from "@mui/material/Avatar";
 
 const Chat = () => {
-    const {auth, firestore} = useContext(Context);
+    const {auth, firestore, app} = useContext(Context);
     const [user] = useAuthState(auth);
     const [value, setValue] = useState('')
     const [messages, loading] = useCollectionData(
@@ -39,7 +39,7 @@ const Chat = () => {
         <Container className="rootContainer">
             <Grid container className={page.gridWrapper} style={{height: window.innerHeight - 50}}>
                 <div className={classes.messagesFrame}>
-                    {messages.map(message =>
+                    {messages?.map(message =>
                         <div className={user.uid === message.uid ?
                             [classes.message, classes.messageFromThisUser].join(' ')
                             :
