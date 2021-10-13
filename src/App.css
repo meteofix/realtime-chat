@@ -3,6 +3,7 @@
   padding: 0;
   box-sizing: border-box;
 }
+
 .MuiGrid-container a:-webkit-any-link{
   color: -webkit-link;
   cursor: pointer;
